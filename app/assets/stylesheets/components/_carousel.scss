@@ -1,0 +1,42 @@
+.carousel {
+	background:#bbb;
+	border:	2px solid black;
+	height:306px;
+	border-radius:5px;
+}
+
+.carousel-arrows {
+	position:absolute;
+	top:40%;
+	width:100%;
+}
+
+.carousel-arrows img {
+	height:50px;
+}
+
+.carousel-index {
+	display: flex;
+	justify-content:center;
+	position: relative;
+	bottom:40px;
+}
+
+.carousel-dot img {
+	height:12px;
+	margin:0 5px;
+}
+
+
+.carousel-images {
+	position: relative;
+	top:0px;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+}
+
+.carousel-images img {
+	background-color:#eee;
+	border: 1px solid #ddd;
+	}

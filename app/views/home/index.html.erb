@@ -22,14 +22,26 @@
   <% end %>
 </div>
 
-<div class="container">
-  <div class="row">
-    <% @tasks.each do |task|  %>
-      <div class="card col-3">
+<div class="container col-8 carousel">
+  <div class="row carousel-arrows">
+    <a href='#' id='carousel-previous' class='mr-auto'> <img src="https://png.pngtree.com/svg/20170626/left_arrow_6661.png"></a>
+    <a href='#' id='carousel-next'> <img src="https://png.pngtree.com/svg/20170626/right_arrow_6663.png"></a>
+  </div>
+  <div class='carousel-images'>
+    <% @tasks.each_with_index do |task, i|  %>
+      <div class='carousel-image' id=<%= i %> >
         <% unless task.image.nil? %>
-          <%= image_tag task.image, class: "rounded-circle" %>
+          <%= image_tag task.image %>
         <% end %>
       </div>
     <% end %>
   </div>
+  <div class="carousel-index">
+    <% @tasks.each_with_index do |task,i|  %>
+      <% unless task.image.nil? %>
+      <a href='#' class='carousel-dot' id=<%= i %> ><img src='https://png.pngtree.com/svg/20170826/carousel_dot_428068.png'></a>
+      <% end %>
+    <% end %>
+  </div>
 </div>
+
