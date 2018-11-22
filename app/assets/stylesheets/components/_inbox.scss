@@ -1,0 +1,32 @@
+.mailbox {
+	max-height:80%;
+	overflow:auto;
+}
+
+#inbox {
+	color: #222;
+	max-height:80%;
+}
+
+.inbox-mail {
+	height-max: 50px;
+}
+
+#email-viewer {
+	max-height:80%;
+}
+
+.email-displayed {
+  	box-shadow: 6px 0px 8px 3px #ccc;
+}
+
+.unread {
+	font-weight:bold;
+	background-color: #777;
+	color:#fff;
+}
+
+.default-text {
+	min-height:500px;
+	margin: auto;
+}

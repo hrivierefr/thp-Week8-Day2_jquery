@@ -1,0 +1,10 @@
+//= require rails-ujs
+
+$(document).ready(function() {
+	$('.inbox-mail').on('ajax:success', function(e) {
+		console.log(e);
+		$('.email-view').fadeOut();
+		$('.email-displayed').fadeOut();
+		$('.default-text').fadeIn();
+	});
+})

@@ -17,6 +17,8 @@
 //= require jquery3
 //= require popper
 
+
+
 $(document).ready(function() {
 
 	//A l'ouverture
@@ -36,32 +38,35 @@ $(document).ready(function() {
 	//Au clic sur l'avatar
 	$('.avatar').on('click',function(e) {
 		e.preventDefault(); //Prevent from the page to refresh or any link to open
-		if ($(this).hasClass('active')) {
-			$(this).removeClass('active');
+		if ($(this).hasClass('dropping-down')) {
+			$(this).removeClass('dropping-down');
 			$('.dropdown-menu').hide();
 		}
 		else {
 			$('.dropdown-menu').show();
-			$(this).addClass('active');
+			$(this).addClass('dropping-down');
 		}
 	})
 
 	//Au clic sur toggler
 	$('.navbar-toggler').on('click',function(e) {
 		e.preventDefault(); //Prevent from the page to refresh or any link to open
-		if ($('.collapse').hasClass('active')) {
-			$('.collapse').removeClass('active');
+		if ($('.collapse').hasClass('dropping-down')) {
+			$('.collapse').removeClass('dropping-down');
 			$('.collapse').hide();
 		}
 		else {
 			$('.collapse').show();
-			$('.collapse').addClass('active');
+			$('.collapse').addClass('dropping-down');
 		}
 	})
 
 
     //Carousel-image
     $('.carousel-image').hide(); //Hide all images
+
+	const imagesCount = Number($('.carousel-image:last').attr('id'));
+	let activePosition ;
 
 	function indexUpdate(position) {
 		$('.active-image img').attr("src", 'https://png.pngtree.com/svg/20170826/carousel_dot_428068.png');
@@ -71,9 +76,18 @@ $(document).ready(function() {
 	}
 
 	function newActiveImage(position) {
-		indexUpdate(position);
-		$('.carousel-image').hide(); //Hide all images
-		$('#'+position+'.carousel-image').fadeIn();
+		if (position > imagesCount) {
+			newActiveImage(0);
+		}
+		else if (position < 0) {
+			newActiveImage(imagesCount);
+		}
+		else {
+			indexUpdate(position);
+			$('.carousel-image').hide(); //Hide all images
+			$('#'+position+'.carousel-image').fadeIn();
+			activePosition = Number(position);
+		}
 	}
 	
 	//A l'ouverture de la page
@@ -85,34 +99,16 @@ $(document).ready(function() {
     	newActiveImage(e.currentTarget.id);
 	})
 
-	const imagesCount = Number($('.carousel-image:last').attr('id'));
-
 	//Clic sur previous
 	$('#carousel-previous').click(function(e) {
-		const activePosition = Number($('.active-image').attr('id'));
-
 		e.preventDefault(); //Prevent from the page to refresh or any link to open
-
-		if (activePosition === 0 ) {
-	    	newActiveImage(imagesCount);
-		}
-		else {
-			newActiveImage(activePosition-1);
-		}
+		newActiveImage(activePosition-1);
 	})
 
 	//Clic sur next
 	$('#carousel-next').click(function(e) {
-		const activePosition = Number($('.active-image').attr('id'));
-
 		e.preventDefault(); //Prevent from the page to refresh or any link to open
-
-		if (activePosition === imagesCount ) {
-	    	newActiveImage(0);
-		}
-		else {
-			newActiveImage(activePosition+1);
-		}
+		newActiveImage(activePosition+1);
 	})
 
 	//Modale
@@ -131,5 +127,20 @@ $(document).ready(function() {
       	$('.modal').modal('hide');
     });
 */
+	function displayMail(id) {
+		$('.email-displayed').removeClass('email-displayed');
+    	$('.email-view').hide();
+    	$('.default-text').hide();
+		$('#'+id+'.inbox-mail').addClass('email-displayed');
+		$('#'+id+'.inbox-mail').removeClass('unread');
+		$('#'+id+'.email-view').fadeIn();
+	}
+
+	displayMail($('.inbox-mail:first').attr('id'));
+
+	$('.inbox-mail').click(function(e) {
+		e.preventDefault(); //Prevent from the page to refresh or any link to open
+    	displayMail(e.target.id);
+    })
 
 })

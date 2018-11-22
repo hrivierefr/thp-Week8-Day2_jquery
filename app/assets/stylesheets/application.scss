@@ -5,3 +5,11 @@
 @import "font-awesome";
 @import "components/*";
 
+a {
+	font-color:inherit;
+}
+
+a:hover {
+	text-decoration:none;
+	text-shadow: 0px 0px 4px white;
+}

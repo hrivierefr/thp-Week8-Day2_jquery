@@ -1,0 +1,31 @@
+<div class='container'>
+	<div class='row mailbox'>
+		<div id='inbox' class='card col-4 bg-light p-0' >
+			<% Email.all.each do |email| %>
+	          	<%= link_to email_path(email.id), :remote => true do %>
+					<div class="card-header p-10 ml-10 inbox-mail <% unless email.read %> <%= 'unread' %> <% end%> " id=<%= email.id %> >
+						<%= email.object %>
+					</div>
+				<% end %>
+			<% end %>
+		</div>
+		<div id='email-viewer' class='card col-7 offset-1'>
+			<div class='default-text text-center align-middle'><h5>Sélectionnez l'email à afficher</h5></div>
+			<% Email.all.each do |email|%>
+			<div class="email-view" id=<%= email.id %> >
+				<div class="row card-header align-items-center" >
+					<div class="column mr-auto col-10">
+						<h5 class='mr-auto mb-0'>Object: <%= email.object %></h5>
+					</div>	          	
+		          	<%= link_to email_path(email.id), method: :delete, data: { confirm: 'Êtes-vous certain de vouloir supprimer cet email?'}, :remote => true, :class => 'delete-email column' do %>
+		          		<button class='btn btn-danger'> 
+	    		        	<i class="fas fa-trash-alt"></i>
+	    		    	</button>
+	        		<%end%>
+				</div>
+				<p class="card-body"><%= email.body %></p>
+			</div>
+			<% end %>
+		</div>
+	</div>
+</div>
